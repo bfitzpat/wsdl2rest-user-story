@@ -6,5 +6,5 @@
 *.log
 .DS_Store
 target
-
+bin
 .yo-rc.json
