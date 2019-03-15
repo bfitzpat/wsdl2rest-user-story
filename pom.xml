@@ -7,7 +7,7 @@
 	<groupId>com.simple</groupId>
 	<artifactId>simple</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<name>simple</name>
 
@@ -22,9 +22,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<version.maven-bundle-plugin>3.2.0</version.maven-bundle-plugin>
 		<camel.version>2.22.2</camel.version>
 		<spring-boot-version>2.1.1.RELEASE</spring-boot-version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<version-maven-compiler-plugin>3.7.0</version-maven-compiler-plugin>
+		<version-maven-surefire-plugin>2.22.1</version-maven-surefire-plugin>
 	</properties>
 
 	<dependencyManagement>
@@ -109,6 +112,41 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-test-spring</artifactId>
 			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-ri</artifactId>
+			<version>2.3.0</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
 
@@ -216,27 +254,30 @@
 					<applicationContextUri>META-INF/spring/camel-context.xml</applicationContextUri>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version-maven-compiler-plugin}</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${version-maven-surefire-plugin}</version>
+			</plugin>			
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${version-maven-surefire-plugin}</version>
+			</plugin>			
 		</plugins>
 	</build>
 
-	<profiles>
-		<profile>
-		<id>jdk9+-build</id>
-		<activation>
-			<jdk>[9,)</jdk>
-		</activation>
-		<build>
-			<plugins>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<argLine>--add-modules java.xml.bind --add-opens java.base/java.lang=ALL-UNNAMED</argLine>
-				</configuration>
-			</plugin>
-			</plugins>
-		</build>
-		</profile>
-	</profiles>
-
-	<description>Empty Camel Spring Example</description>
+	<description>wsdl2rest user story</description>
 </project>

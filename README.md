@@ -19,12 +19,14 @@ Next step: Add a call to a SOAP service that retrieves a list of cities and thei
 * Get weather forecast from <https://openweathermap.org/forecast16>
 * City list here - <http://bulk.openweathermap.org/sample/city.list.json.gz>
 * Weather API docs - <https://openweathermap.org/forecast5#XML>
+* Red Hat office locations - <https://www.redhat.com/en/about/office-locations>
 
 ## Current Status
 
 * Created simple Spring-boot project using Yeoman and camel-project-generator
 * Updated Camel configuration to call weather service and get a report for a city/country pair
 * Have simple SOAP service created that needs to be modified but runs
+* Simple SOAP service now provides a method to retrieve a random city/country
 
 ### Camel Project for Spring Boot
 

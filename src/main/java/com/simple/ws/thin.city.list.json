@@ -1,0 +1,236 @@
+[
+  {
+    "id": 7839562,
+    "name": "Brisbane",
+    "country": "AU",
+    "coord": {
+      "lon": 153.029938,
+      "lat": -27.44573
+    }
+  },
+  {
+    "id": 2172517,
+    "name": "Canberra",
+    "country": "AU",
+    "coord": {
+      "lon": 149.128067,
+      "lat": -35.283459
+    }
+  },
+  {
+    "id": 7839805,
+    "name": "Melbourne",
+    "country": "AU",
+    "coord": {
+      "lon": 144.944214,
+      "lat": -37.813061
+    }
+  },
+  {
+    "id": 2063523,
+    "name": "Perth",
+    "country": "AU",
+    "coord": {
+      "lon": 115.833328,
+      "lat": -31.933331
+    }
+  },
+  {
+    "id": 2147714,
+    "name": "Sydney",
+    "country": "AU",
+    "coord": {
+      "lon": 151.207321,
+      "lat": -33.867851
+    }
+  },
+  {
+    "id": 1816670,
+    "name": "Beijing",
+    "country": "CN",
+    "coord": {
+      "lon": 116.397232,
+      "lat": 39.907501
+    }
+  },
+  {
+    "id": 1796236,
+    "name": "Shanghai",
+    "country": "CN",
+    "coord": {
+      "lon": 121.458061,
+      "lat": 31.222219
+    }
+  },
+  {
+    "id": 1819729,
+    "name": "Hong Kong",
+    "country": "HK",
+    "coord": {
+      "lon": 114.157692,
+      "lat": 22.285521
+    }
+  },
+  {
+    "id": 1277333,
+    "name": "Bangalore",
+    "country": "IN",
+    "coord": {
+      "lon": 77.603287,
+      "lat": 12.97623
+    }
+  },
+  {
+    "id": 1261481,
+    "name": "New Delhi",
+    "country": "IN",
+    "coord": {
+      "lon": 77.23114,
+      "lat": 28.61282
+    }
+  },
+  {
+    "id": 1275004,
+    "name": "Kolkata",
+    "country": "IN",
+    "coord": {
+      "lon": 88.36972,
+      "lat": 22.569719
+    }
+  },
+  {
+    "id": 1275339,
+    "name": "Mumbai",
+    "country": "IN",
+    "coord": {
+      "lon": 72.847939,
+      "lat": 19.01441
+    }
+  },
+  {
+    "id": 1259229,
+    "name": "Pune",
+    "country": "IN",
+    "coord": {
+      "lon": 73.855347,
+      "lat": 18.519569
+    }
+  },
+  {
+    "id": 1642911,
+    "name": "Jakarta",
+    "country": "ID",
+    "coord": {
+      "lon": 106.845131,
+      "lat": -6.21462
+    }
+  },
+  {
+    "id": 1850147,
+    "name": "Tokyo",
+    "country": "JP",
+    "coord": {
+      "lon": 139.691711,
+      "lat": 35.689499
+    }
+  },
+  {
+    "id": 1856057,
+    "name": "Nagoya-shi",
+    "country": "JP",
+    "coord": {
+      "lon": 136.906403,
+      "lat": 35.181469
+    }
+  },
+  {
+    "id": 1853909,
+    "name": "Osaka-shi",
+    "country": "JP",
+    "coord": {
+      "lon": 135.502182,
+      "lat": 34.693741
+    }
+  },
+  {
+    "id": 1863967,
+    "name": "Fukuoka-shi",
+    "country": "JP",
+    "coord": {
+      "lon": 130.41806,
+      "lat": 33.606392
+    }
+  },
+  {
+    "id": 1835848,
+    "name": "Seoul",
+    "country": "KR",
+    "coord": {
+      "lon": 126.977829,
+      "lat": 37.56826
+    }
+  },
+  {
+    "id": 1733045,
+    "name": "Malaysia",
+    "country": "MY",
+    "coord": {
+      "lon": 112.5,
+      "lat": 2.5
+    }
+  },
+  {
+    "id": 2193734,
+    "name": "Auckland",
+    "country": "NZ",
+    "coord": {
+      "lon": 174.783325,
+      "lat": -36.849998
+    }
+  },
+  {
+    "id": 2179538,
+    "name": "Wellington",
+    "country": "NZ",
+    "coord": {
+      "lon": 174.766663,
+      "lat": -41.283329
+    }
+  },
+  {
+    "id": 1703417,
+    "name": "Makati City",
+    "country": "PH",
+    "coord": {
+      "lon": 121.032692,
+      "lat": 14.55027
+    }
+  },
+  {
+    "id": 1880252,
+    "name": "Singapore",
+    "country": "SG",
+    "coord": {
+      "lon": 103.850067,
+      "lat": 1.28967
+    }
+  },
+  {
+    "id": 1668284,
+    "name": "Taiwan",
+    "country": "TW",
+    "coord": {
+      "lon": 121,
+      "lat": 24
+    }
+  },
+  {
+    "id": 1609350,
+    "name": "Bangkok",
+    "country": "TH",
+    "coord": {
+      "lon": 100.51667,
+      "lat": 13.75
+    }
+  }
+]
