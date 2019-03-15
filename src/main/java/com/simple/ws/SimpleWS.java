@@ -26,7 +26,6 @@ import javax.jws.soap.SOAPBinding.Style;
 @SOAPBinding(style = Style.RPC)
 public interface SimpleWS{
  
-	@WebMethod public String getHelloWorldAsString(String name);
 	@WebMethod public String[] getRandomCityAndCountry();
 
 }

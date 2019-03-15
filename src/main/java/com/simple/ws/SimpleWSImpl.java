@@ -34,11 +34,6 @@ import java.nio.file.Files;
 public class SimpleWSImpl implements SimpleWS{
  
 	@Override
-	public String getHelloWorldAsString(String name) {
-		return "Hello World JAX-WS " + name;
-	}
-
-	@Override
 	public String[] getRandomCityAndCountry() {
 		// parse json file, grab a city/country combination
 		String[] returnArray = { "Colorado Springs", "us" };

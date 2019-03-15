@@ -48,4 +48,4 @@ To run the included simple web service, execute the following Maven goal
     mvn compile exec:java -Dexec.mainClass="com.simple.ws.SimpleWSPublisher"
 ```
 
-To get the WSDL file from the web service: <http://localhost:9999/ws/hello?wsdl>
+To get the WSDL file from the web service: <http://localhost:9999/ws/random?wsdl>

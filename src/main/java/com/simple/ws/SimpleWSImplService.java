@@ -31,7 +31,7 @@ import javax.xml.ws.Service;
  *
  */
 @WebServiceClient(name = "SimpleWSImplService",
-                  wsdlLocation = "http://localhost:9999/ws/hello?wsdl",
+                  wsdlLocation = "http://localhost:9999/ws/random?wsdl",
                   targetNamespace = "http://ws.simple.com/")
 public class SimpleWSImplService extends Service {
 
@@ -42,11 +42,11 @@ public class SimpleWSImplService extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("http://localhost:9999/ws/hello?wsdl");
+            url = new URL("http://localhost:9999/ws/random?wsdl");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(SimpleWSImplService.class.getName())
                 .log(java.util.logging.Level.INFO,
-                     "Can not initialize the default wsdl from {0}", "http://localhost:9999/ws/hello?wsdl");
+                     "Can not initialize the default wsdl from {0}", "http://localhost:9999/ws/random?wsdl");
         }
         WSDL_LOCATION = url;
     }

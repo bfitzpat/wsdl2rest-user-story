@@ -23,7 +23,7 @@ import com.simple.ws.SimpleWSImpl;
 public class SimpleWSPublisher{
 	
 	public static void main(String[] args) {
-	   Endpoint.publish("http://localhost:9999/ws/hello", new SimpleWSImpl());
+	   Endpoint.publish("http://localhost:9999/ws/random", new SimpleWSImpl());
     }
 
 }
