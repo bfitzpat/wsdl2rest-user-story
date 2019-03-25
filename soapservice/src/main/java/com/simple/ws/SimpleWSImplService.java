@@ -37,7 +37,7 @@ public class SimpleWSImplService extends Service {
 
     public final static URL WSDL_LOCATION;
 
-    public final static QName SERVICE = new QName("http://ws.city.com/", "SimpleWSImplService");
+    public final static QName SERVICE = new QName("http://city.random.com/", "SimpleWSImplService");
     public final static QName SimpleWSImplPort = new QName("http://city.random.com/", "SimpleWSImplPort");
     static {
         URL url = null;

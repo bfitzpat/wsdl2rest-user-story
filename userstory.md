@@ -9,6 +9,7 @@ This project is designed to create a simple setup for the following scenario:
 ## To run the SOAP-based JAX-WS RPC service
 
 ```bash
+     go into the /soapservice/ directory 
      mvn compile exec:java -Dexec.mainClass="com.simple.ws.SimpleWSPublisher"
 ```
 
@@ -32,7 +33,7 @@ To reference the sample SOAP WSDL with a URL:
 Then specify the following:
 
 * which DSL to generate the Camel configuration for - Spring
-* the output directory for generated CXF artifacts (defaults to src/main/java)
+* the output directory for generated CXF artifacts - src/generated/java (defaults to src/main/java)
 * provide no address for the running jaxws endpoint, it will default to http://localhost:9999/ws/random from the WSDL
 * provide no address for the generated jaxrs endpoint (optional: defaults to http://localhost:8081/jaxrs)
 
