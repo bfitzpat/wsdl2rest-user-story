@@ -7,7 +7,7 @@
 	<groupId>com.simple</groupId>
 	<artifactId>simple</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<name>simple</name>
 
@@ -28,6 +28,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<version-maven-compiler-plugin>3.7.0</version-maven-compiler-plugin>
 		<version-maven-surefire-plugin>2.22.1</version-maven-surefire-plugin>
+		<version.maven-bundle-plugin>3.2.0</version.maven-bundle-plugin>
 	</properties>
 
 	<dependencyManagement>
@@ -131,6 +132,8 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- included to resolve JDK 1.8 jaxb issues -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
@@ -278,6 +281,25 @@
 			</plugin>			
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+		<id>jdk9+-build</id>
+		<activation>
+			<jdk>[9,)</jdk>
+		</activation>
+		<build>
+			<plugins>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>--add-modules java.xml.bind --add-opens java.base/java.lang=ALL-UNNAMED</argLine>
+				</configuration>
+			</plugin>
+			</plugins>
+		</build>
+		</profile>
+	</profiles>
 
 	<description>wsdl2rest user story</description>
 </project>

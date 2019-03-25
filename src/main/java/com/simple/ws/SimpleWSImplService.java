@@ -32,13 +32,13 @@ import javax.xml.ws.Service;
  */
 @WebServiceClient(name = "SimpleWSImplService",
                   wsdlLocation = "http://localhost:9999/ws/random?wsdl",
-                  targetNamespace = "http://ws.simple.com/")
+                  targetNamespace = "http://city.random.com/")
 public class SimpleWSImplService extends Service {
 
     public final static URL WSDL_LOCATION;
 
-    public final static QName SERVICE = new QName("http://ws.simple.com/", "SimpleWSImplService");
-    public final static QName SimpleWSImplPort = new QName("http://ws.simple.com/", "SimpleWSImplPort");
+    public final static QName SERVICE = new QName("http://ws.city.com/", "SimpleWSImplService");
+    public final static QName SimpleWSImplPort = new QName("http://city.random.com/", "SimpleWSImplPort");
     static {
         URL url = null;
         try {
@@ -46,7 +46,7 @@ public class SimpleWSImplService extends Service {
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(SimpleWSImplService.class.getName())
                 .log(java.util.logging.Level.INFO,
-                     "Can not initialize the default wsdl from {0}", "http://localhost:9999/ws/random?wsdl");
+                     "Cannot initialize the default wsdl from {0}", "http://localhost:9999/ws/random?wsdl");
         }
         WSDL_LOCATION = url;
     }
