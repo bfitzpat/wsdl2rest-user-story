@@ -16,10 +16,73 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
     <camelContext id="_camelContext1" xmlns="http://camel.apache.org/schema/spring">
+        <dataFormats>
+            <xmljson id="xmljson"/>
+        </dataFormats>
+        
+        <restConfiguration component="jetty" host="localhost" port="8081" bindingMode="json">
+        </restConfiguration>
+
+        <rest id="id-a58bd3d1-26c6-4145-890d-5aaa9a1aa445" path="/jaxrs">
+
+          <get id="id-d74ed074-7885-4919-8e8e-a23224fcb35e" uri="/countryforcity/{arg0}" 
+            type="java.lang.String"
+            outType="java.lang.String">
+            <to uri="direct:getCountryForCity"/>
+          </get>
+
+          <get id="id-de1c63a2-a351-4f61-b1a0-e6aba8900911" uri="/randomcity" 
+            outType="java.lang.String">
+            <to uri="direct:getRandomCity"/>
+          </get>
+        </rest>
+
+        <route id="getCountryForCity">
+            <from uri="direct:getCountryForCity" />
+            <log loggingLevel="INFO" message="getCountryForCity"/>
+            <setBody>
+                <simple>${header.arg0}</simple>
+            </setBody>
+            <unmarshal>
+                <json library="Jackson" unmarshalTypeName="java.lang.String"/>
+            </unmarshal>
+            <to uri="cxf://http://localhost:9999/ws/random?serviceClass=com.simple.ws.SimpleWS&amp;defaultOperationName=getCountryForCity"/>
+            <setHeader headerName="Content-Type">
+               <constant>text/plain</constant>
+            </setHeader>
+            <setBody>
+                <simple>${body}</simple>
+            </setBody>
+        </route>
+        
+        <route id="getRandomCity">
+            <from uri="direct:getRandomCity" />
+            <log loggingLevel="INFO" message="getRandomCity"/>
+            <setBody>
+                <simple>null</simple>
+            </setBody>
+            <to uri="cxf://http://localhost:9999/ws/random?serviceClass=com.simple.ws.SimpleWS&amp;defaultOperationName=getRandomCity"/>
+            <setHeader headerName="Content-Type">
+               <constant>text/plain</constant>
+            </setHeader>
+            <setBody>
+                <simple>${body}</simple>
+            </setBody>
+        </route>
+
         <route id="_route1">
             <from id="_from1" uri="timer://simpleTimer?period=10000"/>
-            <setHeader headerName="cityName"><constant>Colorado Springs</constant></setHeader>
-            <setHeader headerName="countryName"><constant>us</constant></setHeader>
+            <toD id="_toCity" uri="http://localhost:8081/jaxrs/randomcity"/>
+            <setHeader headerName="cityName">
+                <simple>${body}</simple>
+            </setHeader>
+            <setHeader headerName="countryURI">
+                <simple>http://localhost:8081/jaxrs/countryforcity/${header.cityName}</simple>
+            </setHeader>
+            <toD id="_toCountry" uri="${header.countryURI}"/>
+            <setHeader headerName="countryName">
+                <simple>${body}</simple>
+            </setHeader>
             <!-- get application ID from https://home.openweathermap.org/api_keys when you sign up for a free account -->
             <setHeader headerName="appId"><constant>edb0497f39df0cb266c17ecff48dfe30</constant></setHeader>
             <setHeader headerName="weatherUri"><simple>http://api.openweathermap.org/data/2.5/weather?q=${header.cityName},${header.countryName}%26APPID=${header.appId}</simple></setHeader>

@@ -8,4 +8,4 @@
 target
 bin
 .yo-rc.json
-soapservice/target
+config

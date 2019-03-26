@@ -8,8 +8,11 @@ This project is designed to create a simple setup for the following scenario:
 
 ## To run the SOAP-based JAX-WS RPC service
 
+Clone the https://github.com/bfitzpat/wsdl2rest-user-story-ws repository locally.
+
+In your local repository:
+
 ```bash
-     go into the /soapservice/ directory 
      mvn compile exec:java -Dexec.mainClass="com.simple.ws.SimpleWSPublisher"
 ```
 
