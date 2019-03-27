@@ -75,40 +75,45 @@
         <!-- my simple integration -->
         <route id="_route1">
             <!-- every few seconds, kick this off with a random city/country pair -->
-            <from id="_from1" uri="timer://simpleTimer?period=10000"/>
+            <from id="_fromTimer" uri="timer://simpleTimer?period=10000&amp;repeatCount=3"/>
 
             <!-- get the random city name -->
+            <log id ="_log1" message="Retrieving random city"/>
             <toD id="_toCity" uri="http://localhost:8081/jaxrs/randomcity"/>
-            <setHeader headerName="cityName">
+            <setProperty id="_propertyCity" propertyName="cityName">
                 <simple>${body}</simple>
-            </setHeader>
+            </setProperty>
 
             <!-- get the country code for the random city -->
-            <setHeader headerName="countryURI">
-                <simple>http://localhost:8081/jaxrs/countryforcity/%22{${header.cityName}}%22</simple>
-            </setHeader>
+            <!-- weird behavior - calling property a second time, it's empty -->
+            <!-- <log id="_logMe2" message="Retrieving country code for city ${exchangeProperty.cityName}"/>
+            <log id="_logMe3" message="Retrieving country code for city ${exchangeProperty.cityName} again"/> -->
+
             <!-- this fails -->
-            <!-- Caused by: [org.apache.camel.http.common.HttpOperationFailedException - HTTP operation failed invoking http://localhost:8081/jaxrs/countryforcity/%22%7BJakarta%7D%22 with statusCode: 405] -->
-            <!-- the URL runs fine outside of the Camel route - http://localhost:8081/jaxrs/countryforcity/%22%7BJakarta%7D%22 -->
-            <toD id="_toCountry" uri="${header.countryURI}"/>
-            <setHeader headerName="countryName">
+            <!-- Caused by: 2019-03-27 08:28:44.153 ERROR 14540 [r://simpleTimer] o.a.camel.processor.DefaultErrorHandler  : Failed delivery for (MessageId: ID-brianf-work-1553696919944-0-5 on ExchangeId: ID-brianf-work-1553696919944-0-1). Exhausted after delivery attempt: 1 caught: org.apache.camel.http.common.HttpOperationFailedException: HTTP operation failed invoking http://localhost:8081/jaxrs/countryforcity/%22Mumbai%22 with statusCode: 405 -->
+            <!-- the URL runs fine outside of the Camel route - http://localhost:8081/jaxrs/countryforcity/%22Mumbai%22 -->
+            <toD id="_toCountry" uri="http://localhost:8081/jaxrs/countryforcity/%22${exchangeProperty.cityName}%22"/>
+            <setProperty id="_propertyCountry" propertyName="countryName">
                 <simple>${body}</simple>
-            </setHeader>
+            </setProperty>
+
+            <!-- based on weird property behavior this seems to clear the header after it's called -->
+            <!-- <log id="_logMe4" message="Retrieved country ${header.countryName}"/> -->
 
             <!-- get application ID from https://home.openweathermap.org/api_keys when you sign up for a free account -->
             <setHeader headerName="appId">
                 <constant>edb0497f39df0cb266c17ecff48dfe30</constant> <!-- replace this with your API key -->
             </setHeader>
             <setHeader headerName="weatherUri">
-                <simple>http://api.openweathermap.org/data/2.5/weather?q=${header.cityName},${header.countryName}%26APPID=${header.appId}</simple>
+                <simple>http://api.openweathermap.org/data/2.5/weather?q=${exchangeProperty.cityName},${exchangeProperty.countryName}%26APPID=${header.appId}</simple>
             </setHeader>
-            <toD id="_to2" uri="${header.weatherUri}"/>
+            <toD id="_toWeather" uri="${header.weatherUri}"/>
 
             <!-- output the response -->
-            <setBody id="_setBody1">
+            <setBody id="_setWeatherBody">
                 <simple>Received a weather response: ${body}</simple>
             </setBody>
-            <to id="_to1" uri="stream:out"/>
+            <to id="_toStream" uri="stream:out"/>
         </route>
     </camelContext>
 </beans>
