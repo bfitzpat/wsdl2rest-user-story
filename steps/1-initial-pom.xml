@@ -115,33 +115,6 @@
 			<version>${camel.version}</version>
 		</dependency>
 
-		<!-- wsdl2rest, CXF, and Rest DSL related -->
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jackson</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-cxf-starter</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jetty-starter</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-jetty</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.ws</groupId>
-			<artifactId>jaxws-ri</artifactId>
-			<version>2.3.0</version>
-			<type>pom</type>
-		</dependency>
-
 		<!-- included to resolve JDK 1.8 jaxb issues -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>

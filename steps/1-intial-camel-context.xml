@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2014-2017, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<!-- Configures the Camel Context-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <camelContext id="_camelContext1" xmlns="http://camel.apache.org/schema/spring">
+
+        <route id="_weather">
+            <from id="_fromTimer" uri="timer://simpleTimer?period=10000&amp;repeatCount=1"/>
+
+            <!-- stash city -->
+            <setHeader headerName="cityName">
+                <constant>Raleigh</constant>
+            </setHeader>
+            <!-- stash country -->
+            <setHeader headerName="countryName">
+                <constant>us</constant>
+            </setHeader>
+            <log message="Retrieving weather for $simple{header.cityName}, $simple{header.countryName}"/>
+
+            <!-- get application ID from https://home.openweathermap.org/api_keys when you sign up for a free account -->
+            <setProperty propertyName="appId">
+                <constant>WEATHERAPIID</constant> <!-- replace this with your API key -->
+            </setProperty>
+            <setProperty propertyName="weatherUri">
+                <simple>q=$simple{header.cityName},$simple{header.countryName}%26APPID=${property.appId}%26mode=xml</simple>
+            </setProperty>
+            <toD id="_toWeather" uri="http://api.openweathermap.org/data/2.5/weather?${property.weatherUri}"/>
+
+            <!-- output the response -->
+            <setBody id="_setWeatherBody">
+                <simple>Received a weather response: ${body}</simple>
+            </setBody>
+            <to id="_toStream" uri="stream:out"/>
+        </route>
+    </camelContext>
+</beans>

@@ -72,54 +72,25 @@
             </setBody>
         </route>
 
-        <route id="_city">
-            <!-- every few seconds, kick this off with a random city/country pair -->
-            <from id="_fromTimer" uri="timer://simpleTimer?period=10000&amp;repeatCount=3"/>
-            <!-- get the random city name -->
-            <log message="Retrieving random city"/>
-            <toD id="_toCity" uri="http://localhost:8081/jaxrs/randomcity"/>
-
-            <!-- pass along city name -->
-            <setHeader headerName="cityName">
-                <simple resultType="String">${body}</simple>
-            </setHeader>
-            <log message="Random city passed: $simple{header.cityName}"/>
-            <to uri="direct:getCountry" />
-        </route>
-
-        <route id="_country">
-            <!-- get the country code for the random city -->
-            <from uri="direct:getCountry"/>
-            <log message="Retrieving country code for: $simple{in.header.cityName}"/>
-            <setHeader headerName="CamelHttpMethod">
-                <constant>GET</constant>
-            </setHeader>
-            <!-- stash city -->
-            <setProperty propertyName="stashCity">
-                <simple resultType="String">$simple{in.header.cityName}</simple>
-            </setProperty>
-            <toD id="_toCountry" uri="http://localhost:8081/jaxrs/countryforcity/%22$simple{in.header.cityName}%22"/>
-
-            <!-- set city in header-->
-            <setHeader headerName="cityName">
-                <simple resultType="String">$simple{property.stashCity}</simple>
-            </setHeader>
-            <!-- set country in header -->
-            <setHeader headerName="countryName">
-                <simple resultType="String">${body}</simple>
-            </setHeader>
-            <log message="Country for random city $simple{header.cityName} = $simple{header.countryName}"/>
-            <to uri="direct:getWeather" />
-        </route>
-
         <route id="_weather">
-            <from uri="direct:getWeather"/>
+            <from id="_fromTimer" uri="timer://simpleTimer?period=10000&amp;repeatCount=1"/>
+
+            <!-- stash city -->
+            <setHeader headerName="cityName">
+                <constant>Raleigh</constant>
+            </setHeader>
+            <!-- stash country -->
+            <setHeader headerName="countryName">
+                <constant>us</constant>
+            </setHeader>
+            <log message="Retrieving weather for $simple{header.cityName}, $simple{header.countryName}"/>
+
             <!-- get application ID from https://home.openweathermap.org/api_keys when you sign up for a free account -->
             <setProperty propertyName="appId">
                 <constant>WEATHERAPIID</constant> <!-- replace this with your API key -->
             </setProperty>
             <setProperty propertyName="weatherUri">
-                <simple>q=$simple{in.header.cityName},$simple{in.header.countryName}%26APPID=${property.appId}%26mode=xml</simple>
+                <simple>q=$simple{header.cityName},$simple{header.countryName}%26APPID=${property.appId}%26mode=xml</simple>
             </setProperty>
             <toD id="_toWeather" uri="http://api.openweathermap.org/data/2.5/weather?${property.weatherUri}"/>
 
@@ -129,5 +100,6 @@
             </setBody>
             <to id="_toStream" uri="stream:out"/>
         </route>
+
     </camelContext>
 </beans>
